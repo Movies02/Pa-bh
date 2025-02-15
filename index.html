@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel de Imagens</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; background: #f52929; }
+        .carousel { position: relative; width: 80%; max-width: 600px; overflow: hidden; border-radius: 10px; box-shadow: 0 0 30px rgba(248, 247, 152, 0.5); }
+        .images { display: flex; transition: transform 0.5s ease-in-out; }
+        img { width: 100%; border-radius: 10px; }
+        .buttons { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); }
+        button { background: rgba(0, 0, 0, 0.5); color: white; border: none; padding: 10px; cursor: pointer; font-size: 20px; }
+        button:hover { background: rgba(0, 0, 0, 0.8); }
+        h1{
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        #carousel{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <audio src="LEO2745_-_VIAGEM(128k).m4a" type="audio/mp4" autoplay></audio>
+    <div class="carousel">
+        <h1 id="texto">São valentim💖❤🤍</h1>
+        <div class="images">
+            <img src="1.png" alt="Imagem 1">
+            <img src="2.png" alt="Imagem 2">
+            <img src="3.png" alt="Imagem 3">
+            <img src="4.png" alt="Imagem 4">
+            <img src="5.png" alt="Imagem 5">
+            <img src="6.png" alt="Imagem 6">
+        </div>
+        <div class="buttons">
+            <button id="prev">&#10094;</button>
+            <button id="next">&#10095;</button>
+        </div>
+    </div>
+    <script>
+        const images = document.querySelector('.images');
+        const totalImages = document.querySelectorAll('.images img').length;
+        let index = 0;
+        
+        document.getElementById('next').addEventListener('click', () => {
+            nextImage();
+        });
+        
+        document.getElementById('prev').addEventListener('click', () => {
+            prevImage();
+        });
+        
+        function nextImage() {
+            index = (index + 1) % totalImages;
+            updateCarousel();
+        }
+        
+        function prevImage() {
+            index = (index - 1 + totalImages) % totalImages;
+            updateCarousel();
+        }
+        
+        function updateCarousel() {
+            images.style.transform = `translateX(-${index * 100}%)`;
+        }
+        
+        setInterval(nextImage, 5000);
+    </script>
+</body>
+</html>
